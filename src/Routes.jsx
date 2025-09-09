@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes as RouterRoutes, Route } from "react-router-dom";
-import ScrollToTop from "components/ScrollToTop";
-import ErrorBoundary from "components/ErrorBoundary";
-import NotFound from "pages/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
+import ErrorBoundary from "./components/ErrorBoundary";
+import NotFound from "./pages/NotFound";
 import AboutEcosystemCompanyStory from './pages/about-ecosystem-company-story';
 import PortfolioShowcase from './pages/portfolio-showcase-success-stories';
 import ClientDashboard from './pages/client-dashboard-project-command-center';
@@ -19,7 +19,7 @@ const Routes = () => {
       <ScrollToTop />
       <RouterRoutes>
         {/* Define your route here */}
-        <Route path="/" element={<AboutEcosystemCompanyStory />} />
+        <Route path="/" element={<Homepage />} />
         <Route path="/about-ecosystem-company-story" element={<AboutEcosystemCompanyStory />} />
         <Route path="/portfolio-showcase-success-stories" element={<PortfolioShowcase />} />
         <Route path="/client-dashboard-project-command-center" element={<ClientDashboard />} />

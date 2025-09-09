@@ -307,31 +307,101 @@ const ClientDashboard = () => {
   ];
 
   const handleProjectDetails = (project) => {
-    console.log('View project details:', project);
+    if (project.submissionData) {
+      const subject = encodeURIComponent(`Project Details: ${project.name}`);
+      const body = encodeURIComponent(`Project: ${project.name}\n\nDescription: ${project.description}\n\nStatus: ${project.status}\n\nProgress: ${project.progress}%\n\nDue Date: ${project.dueDate}\n\nTeam Size: ${project.teamSize}\n\nTime Remaining: ${project.timeRemaining}\n\nSubmission Data:\n${JSON.stringify(project.submissionData, null, 2)}\n\nPhone: +91 8252472186`);
+      window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+    } else {
+      alert('No project details available. Submit a quote or consultation request first.');
+    }
   };
 
   const handleCreateTicket = () => {
-    console.log('Create new support ticket');
+    const subject = encodeURIComponent('New Support Ticket - AI Automation Hub');
+    const body = encodeURIComponent(`Hi Team,\n\nI need support with:\n\nIssue Description:\n\nPriority: \n\nPlease contact me to discuss further.\n\nBest regards`);
+    window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const handleViewTicket = (ticket) => {
-    console.log('View ticket:', ticket);
+    if (ticket.submissionData) {
+      const subject = encodeURIComponent(`Support Ticket: ${ticket.title}`);
+      const body = encodeURIComponent(`Ticket ID: ${ticket.id}\n\nTitle: ${ticket.title}\n\nDescription: ${ticket.description}\n\nStatus: ${ticket.status}\n\nPriority: ${ticket.priority}\n\nCategory: ${ticket.category}\n\nCreated: ${ticket.createdDate}\n\nResponse Time: ${ticket.responseTime}\n\nSubmission Data:\n${JSON.stringify(ticket.submissionData, null, 2)}\n\nPhone: +91 8252472186`);
+      window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+    } else {
+      alert('No ticket details available.');
+    }
   };
 
   const handleDownloadResource = (resource) => {
-    console.log('Download resource:', resource);
+    const content = `Resource: ${resource.title}\n\nDescription: ${resource.description}\n\nType: ${resource.type}\n\nCategory: ${resource.category}\n\nSize: ${resource.size} bytes\n\nLast Updated: ${resource.lastUpdated}\n\nContact: akashkumar.webdev@gmail.com\nPhone: +91 8252472186`;
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${resource.title.replace(/\s+/g, '-').toLowerCase()}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
   };
 
   const handleViewResource = (resource) => {
-    console.log('View resource:', resource);
+    const subject = encodeURIComponent(`Resource Request: ${resource.title}`);
+    const body = encodeURIComponent(`Hi Team,\n\nI would like to access the resource: ${resource.title}\n\nDescription: ${resource.description}\n\nPlease provide access or more information.\n\nBest regards`);
+    window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const handleViewInvoice = (invoice) => {
-    console.log('View invoice:', invoice);
+    const subject = encodeURIComponent(`Invoice Inquiry: ${invoice.number}`);
+    const body = encodeURIComponent(`Invoice Number: ${invoice.number}\n\nDescription: ${invoice.description}\n\nAmount: ${invoice.currency} ${invoice.amount}\n\nStatus: ${invoice.status}\n\nDate: ${invoice.date}\n\nPlease provide invoice details or payment information.\n\nPhone: +91 8252472186`);
+    window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const handleMakePayment = (invoice) => {
-    console.log('Make payment for invoice:', invoice);
+    const subject = encodeURIComponent(`Payment Request: ${invoice.number}`);
+    const body = encodeURIComponent(`Invoice Number: ${invoice.number}\n\nAmount: ${invoice.currency} ${invoice.amount}\n\nDescription: ${invoice.description}\n\nI would like to make payment for this invoice.\n\nPlease provide payment instructions.\n\nPhone: +91 8252472186`);
+    window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  const handleQuickCall = () => {
+    window.location.href = 'tel:+918252472186';
+  };
+
+  const handleRequestNewProject = () => {
+    navigate('/contact-scheduling-multi-channel-engagement');
+  };
+
+  const handleExportData = () => {
+    const allData = {
+      projects: liveData.projects,
+      activities: liveData.activities,
+      supportTickets: liveData.supportTickets,
+      submissions: getSubmissions(),
+      exportDate: new Date().toISOString()
+    };
+    
+    const content = `AI Automation Hub - Dashboard Export\n\n${JSON.stringify(allData, null, 2)}\n\nContact: akashkumar.webdev@gmail.com\nPhone: +91 8252472186`;
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `dashboard-export-${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleAddPaymentMethod = () => {
+    const subject = encodeURIComponent('Add Payment Method - AI Automation Hub');
+    const body = encodeURIComponent(`Hi Team,\n\nI would like to add a new payment method to my account.\n\nPlease provide instructions for adding payment methods.\n\nBest regards`);
+    window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  const handleViewAll = (type) => {
+    const subject = encodeURIComponent(`View All ${type} - AI Automation Hub`);
+    const body = encodeURIComponent(`Hi Team,\n\nI would like to view all ${type.toLowerCase()} in my account.\n\nPlease provide access or more information.\n\nBest regards`);
+    window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const renderTabContent = () => {
@@ -378,7 +448,7 @@ const ClientDashboard = () => {
                 <h2 className="text-2xl font-bold text-text-primary">Projects</h2>
                 <p className="text-text-secondary">Track your automation implementation progress</p>
               </div>
-              <Button variant="default" iconName="Plus" iconPosition="left">
+              <Button variant="default" iconName="Plus" iconPosition="left" onClick={handleRequestNewProject}>
                 Request New Project
               </Button>
             </div>
@@ -554,23 +624,24 @@ const ClientDashboard = () => {
             </Button>
             
             <div className="absolute bottom-16 right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 space-y-2">
-              <Button
-                variant="default"
-                size="sm"
-                className="rounded-full shadow-lg whitespace-nowrap"
-                onClick={handleCreateTicket}
-              >
-                <Icon name="MessageSquare" size={16} className="mr-2" />
-                New Ticket
-              </Button>
-              <Button
-                variant="default"
-                size="sm"
-                className="rounded-full shadow-lg whitespace-nowrap"
-              >
-                <Icon name="Phone" size={16} className="mr-2" />
-                Quick Call
-              </Button>
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="rounded-full shadow-lg whitespace-nowrap"
+                    onClick={handleCreateTicket}
+                  >
+                    <Icon name="MessageSquare" size={16} className="mr-2" />
+                    New Ticket
+                  </Button>
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="rounded-full shadow-lg whitespace-nowrap"
+                    onClick={handleQuickCall}
+                  >
+                    <Icon name="Phone" size={16} className="mr-2" />
+                    Quick Call
+                  </Button>
             </div>
           </div>
         </div>

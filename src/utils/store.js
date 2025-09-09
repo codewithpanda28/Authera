@@ -1,23 +1,38 @@
-export const saveSubmission = (key, data) => {
+export const saveSubmission = (type, data) => {
   try {
-    const existingRaw = localStorage.getItem(key);
-    const existing = existingRaw ? JSON.parse(existingRaw) : [];
-    const record = { id: Date.now(), createdAt: new Date().toISOString(), ...data };
-    const updated = [record, ...existing];
-    localStorage.setItem(key, JSON.stringify(updated));
-    return record;
+    const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+    const newSubmission = {
+      id: Date.now(),
+      type,
+      data,
+      timestamp: new Date().toISOString(),
+      status: 'pending'
+    };
+    submissions.push(newSubmission);
+    localStorage.setItem('submissions', JSON.stringify(submissions));
+    return newSubmission;
   } catch (error) {
-    // noop
+    console.error('Error saving submission:', error);
     return null;
   }
 };
 
-export const loadSubmissions = (key) => {
+export const getSubmissions = () => {
   try {
-    const existingRaw = localStorage.getItem(key);
-    return existingRaw ? JSON.parse(existingRaw) : [];
+    return JSON.parse(localStorage.getItem('submissions') || '[]');
   } catch (error) {
+    console.error('Error getting submissions:', error);
     return [];
+  }
+};
+
+export const clearSubmissions = () => {
+  try {
+    localStorage.removeItem('submissions');
+    return true;
+  } catch (error) {
+    console.error('Error clearing submissions:', error);
+    return false;
   }
 };
 
