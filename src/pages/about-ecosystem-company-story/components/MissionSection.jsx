@@ -1,8 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
+import Button from '../../../components/ui/Button';
 
 
 const MissionSection = () => {
+  const navigate = useNavigate();
+  
   const impactMetrics = [
     {
       icon: "TrendingUp",
@@ -179,6 +183,53 @@ const MissionSection = () => {
                 <h4 className="font-semibold mb-2">Transformation</h4>
                 <p className="text-sm text-white/80">Driving meaningful business change</p>
               </div>
+            </div>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white/30 text-white hover:bg-white/10"
+                iconName="Users"
+                iconPosition="left"
+                onClick={() => {
+                  const el = document.querySelector('#team-section');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+              >
+                Meet Our Team
+              </Button>
+              <Button
+                variant="default"
+                size="lg"
+                className="bg-accent text-primary hover:bg-accent/90"
+                iconName="Briefcase"
+                iconPosition="left"
+                onClick={() => {
+                  const subject = encodeURIComponent('Career Opportunities - AI Automation Hub');
+                  const body = encodeURIComponent(`Hi Team,\n\nI am interested in career opportunities at AI Automation Hub.\n\nPlease share available positions and benefits.\n\nBest regards`);
+                  window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+                }}
+              >
+                View Open Positions
+              </Button>
+              <Button
+                variant="ghost"
+                size="lg"
+                className="text-white hover:bg-white/10"
+                iconName="Heart"
+                iconPosition="left"
+                onClick={() => {
+                  const subject = encodeURIComponent('Learn About Benefits - AI Automation Hub');
+                  const body = encodeURIComponent(`Hi Team,\n\nI would like to learn about employee benefits and perks at AI Automation Hub.\n\nPlease share detailed information.\n\nBest regards`);
+                  window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+                }}
+              >
+                Learn About Benefits
+              </Button>
             </div>
           </div>
         </div>

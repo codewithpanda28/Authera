@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import { saveSubmission } from '../../../utils/store';
 
 const PortfolioHero = () => {
   const stats = [
@@ -13,6 +14,12 @@ const PortfolioHero = () => {
   const navigate = useNavigate();
 
   const goToVideos = () => {
+    const payload = {
+      type: 'video_request',
+      action: 'watch_success_stories',
+      timestamp: new Date().toISOString()
+    };
+    saveSubmission('portfolio_interactions', payload);
     navigate('/portfolio-showcase-success-stories');
     requestAnimationFrame(() => {
       const el = document?.querySelector('#success-videos');
@@ -21,8 +28,24 @@ const PortfolioHero = () => {
   };
 
   const downloadCaseStudies = () => {
-    // Placeholder: navigate to portfolio where downloads live
-    navigate('/portfolio-showcase-success-stories');
+    const payload = {
+      type: 'case_study_download',
+      action: 'download_case_studies',
+      timestamp: new Date().toISOString()
+    };
+    saveSubmission('portfolio_interactions', payload);
+    
+    // Generate and download case studies file
+    const content = `AI Automation Hub - Case Studies\n\nSuccess Stories:\n\n1. TechManufacturing India - 45% Cost Reduction\n2. GlobalShop Solutions - 80% Faster Response\n3. FinTech Innovations - 20 Hours Saved/Week\n4. Digital Growth Agency - 250% More Leads\n\nContact: akashkumar.webdev@gmail.com\nPhone: +91 8252472186`;
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ai-automation-case-studies.txt';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
   };
 
   return (

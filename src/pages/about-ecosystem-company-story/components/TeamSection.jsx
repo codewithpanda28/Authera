@@ -117,7 +117,7 @@ const TeamSection = () => {
     : teamMembers?.filter(member => member?.department === filterRole);
 
   return (
-    <section className="py-20 bg-muted">
+    <section id="team-section" className="py-20 bg-muted">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -300,11 +300,21 @@ const TeamSection = () => {
                   </div>
                   
                   <div className="flex space-x-4">
-                    <button className="flex items-center space-x-2 px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors">
+                    <button 
+                      className="flex items-center space-x-2 px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors"
+                      onClick={() => {
+                        const subject = encodeURIComponent(`Contact ${selectedMember?.name} - AI Automation Hub`);
+                        const body = encodeURIComponent(`Hi ${selectedMember?.name},\n\nI would like to discuss AI automation opportunities.\n\nBest regards`);
+                        window.location.href = `mailto:${selectedMember?.contact?.email}?subject=${subject}&body=${body}`;
+                      }}
+                    >
                       <Icon name="Mail" size={16} />
                       <span>Contact</span>
                     </button>
-                    <button className="flex items-center space-x-2 px-4 py-2 border border-accent text-accent rounded-lg hover:bg-accent/10 transition-colors">
+                    <button 
+                      className="flex items-center space-x-2 px-4 py-2 border border-accent text-accent rounded-lg hover:bg-accent/10 transition-colors"
+                      onClick={() => window.open(`https://linkedin.com/in/${selectedMember?.contact?.linkedin}`, '_blank')}
+                    >
                       <Icon name="Linkedin" size={16} />
                       <span>LinkedIn</span>
                     </button>

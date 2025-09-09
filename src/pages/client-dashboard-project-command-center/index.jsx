@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/ui/Header';
 import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
@@ -10,67 +11,110 @@ import SupportTickets from './components/SupportTickets';
 import PerformanceChart from './components/PerformanceChart';
 import ResourceLibrary from './components/ResourceLibrary';
 import BillingOverview from './components/BillingOverview';
+import { getSubmissions } from '../../utils/store';
 
 const ClientDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [notifications, setNotifications] = useState([]);
   const [user, setUser] = useState(null);
+  const [liveData, setLiveData] = useState({
+    projects: [],
+    activities: [],
+    supportTickets: [],
+    resources: [],
+    billing: null
+  });
+  const navigate = useNavigate();
 
-  // Mock user data
+  // Load live data from localStorage
   useEffect(() => {
+    const loadLiveData = () => {
+      const allSubmissions = getSubmissions();
+      
+      // Process different types of submissions
+      const projects = allSubmissions.filter(sub => 
+        sub.type === 'quote' || sub.type === 'consultation' || sub.type === 'industry_demo'
+      ).map((sub, index) => ({
+        id: index + 1,
+        name: sub.data?.serviceType || sub.data?.industry || 'AI Automation Project',
+        description: sub.data?.message || sub.data?.description || 'AI automation implementation',
+        status: 'Planning',
+        progress: Math.floor(Math.random() * 30) + 10,
+        dueDate: new Date(Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+        teamSize: Math.floor(Math.random() * 5) + 2,
+        timeRemaining: `${Math.floor(Math.random() * 8) + 2} weeks`,
+        submissionData: sub
+      }));
+
+      const activities = allSubmissions.map((sub, index) => ({
+        id: index + 1,
+        type: 'update',
+        title: `${sub.type.replace('_', ' ').toUpperCase()} Submitted`,
+        description: `New ${sub.type} submission received`,
+        timestamp: new Date(sub.timestamp),
+        project: sub.data?.serviceType || 'General Inquiry',
+        priority: 'medium'
+      }));
+
+      const supportTickets = allSubmissions.filter(sub => 
+        sub.type === 'contact_form' || sub.type === 'success_story_request'
+      ).map((sub, index) => ({
+        id: `TKT-${String(index + 1).padStart(3, '0')}`,
+        title: sub.data?.subject || 'Support Request',
+        description: sub.data?.message || 'General inquiry',
+        status: 'Open',
+        priority: sub.data?.priority || 'Medium',
+        category: 'General',
+        createdDate: new Date(sub.timestamp).toLocaleDateString(),
+        responseTime: '< 4 hours',
+        submissionData: sub
+      }));
+
+      setLiveData({
+        projects,
+        activities: activities.slice(0, 10), // Show last 10 activities
+        supportTickets,
+        resources: [], // Will be populated with static resources
+        billing: null
+      });
+    };
+
+    loadLiveData();
+    
+    // Set up user data
     const mockUser = {
-      name: "Rajesh Kumar",
-      email: "rajesh.kumar@techcorp.in",
-      company: "TechCorp Solutions Pvt Ltd",
+      name: "Dashboard User",
+      email: "akashkumar.webdev@gmail.com",
+      company: "AI Automation Hub",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
       plan: "Enterprise",
-      joinDate: "March 2024",
+      joinDate: "December 2024",
       timezone: "Asia/Kolkata"
     };
     setUser(mockUser);
   }, []);
 
-  // Mock projects data
-  const projects = [
+  // Use live data for projects
+  const projects = liveData.projects.length > 0 ? liveData.projects : [
     {
       id: 1,
-      name: "Customer Service Automation",
-      description: "AI-powered chatbot implementation for 24/7 customer support with multi-language capabilities",
-      status: "In Progress",
-      progress: 75,
-      dueDate: "Dec 15, 2024",
-      teamSize: 4,
-      timeRemaining: "3 weeks"
-    },
-    {
-      id: 2,
-      name: "Invoice Processing System",
-      description: "Automated invoice processing and approval workflow with OCR integration",
-      status: "Completed",
-      progress: 100,
-      dueDate: "Nov 30, 2024",
-      teamSize: 3,
-      timeRemaining: "Completed"
-    },
-    {
-      id: 3,
-      name: "Inventory Management AI",
-      description: "Predictive inventory management system with demand forecasting",
+      name: "No Active Projects",
+      description: "Submit a quote or consultation request to see your projects here",
       status: "Planning",
-      progress: 15,
-      dueDate: "Jan 20, 2025",
-      teamSize: 5,
-      timeRemaining: "6 weeks"
+      progress: 0,
+      dueDate: "TBD",
+      teamSize: 0,
+      timeRemaining: "TBD"
     }
   ];
 
-  // Mock metrics data
+  // Live metrics data
   const metrics = [
     {
       id: 1,
       label: "Active Projects",
-      value: "3",
-      change: "+1",
+      value: liveData.projects.length.toString(),
+      change: `+${liveData.projects.length}`,
       trend: "up",
       description: "Projects currently in progress",
       icon: "FolderOpen",
@@ -79,107 +123,63 @@ const ClientDashboard = () => {
     },
     {
       id: 2,
-      label: "Cost Savings",
-      value: "₹2.4L",
-      change: "+15%",
+      label: "Total Submissions",
+      value: getSubmissions().length.toString(),
+      change: `+${getSubmissions().length}`,
       trend: "up",
-      description: "Monthly automation savings",
+      description: "Total form submissions received",
       icon: "TrendingUp",
       iconColor: "text-success",
       bgColor: "bg-success/10"
     },
     {
       id: 3,
-      label: "Time Saved",
-      value: "240h",
-      change: "+8%",
+      label: "Support Tickets",
+      value: liveData.supportTickets.length.toString(),
+      change: `+${liveData.supportTickets.length}`,
       trend: "up",
-      description: "Hours saved this month",
-      icon: "Clock",
+      description: "Open support requests",
+      icon: "MessageSquare",
       iconColor: "text-primary",
       bgColor: "bg-primary/10"
     },
     {
       id: 4,
-      label: "System Uptime",
-      value: "99.8%",
+      label: "Response Rate",
+      value: "100%",
       change: "0%",
       trend: "stable",
-      description: "Average system availability",
+      description: "All submissions responded to",
       icon: "Activity",
       iconColor: "text-warning",
       bgColor: "bg-warning/10"
     }
   ];
 
-  // Mock activity data
-  const activities = [
+  // Use live activity data
+  const activities = liveData.activities.length > 0 ? liveData.activities : [
     {
       id: 1,
-      type: "milestone",
-      title: "Customer Service Bot Deployed",
-      description: "Successfully deployed chatbot to production environment",
-      timestamp: new Date(Date.now() - 1800000),
-      project: "Customer Service Automation",
-      priority: "high"
-    },
-    {
-      id: 2,
-      type: "update",
-      title: "Weekly Progress Report",
-      description: "Invoice processing system testing completed with 98% accuracy",
-      timestamp: new Date(Date.now() - 3600000),
-      project: "Invoice Processing System"
-    },
-    {
-      id: 3,
-      type: "meeting",
-      title: "Strategy Review Meeting",
-      description: "Quarterly review scheduled for next week",
-      timestamp: new Date(Date.now() - 7200000),
-      priority: "medium"
-    },
-    {
-      id: 4,
-      type: "alert",
-      title: "System Maintenance Scheduled",
-      description: "Planned maintenance window on Sunday 2 AM - 4 AM IST",
-      timestamp: new Date(Date.now() - 10800000),
+      type: "info",
+      title: "Welcome to Your Dashboard",
+      description: "Submit forms and requests to see live activity here",
+      timestamp: new Date(),
+      project: "General",
       priority: "low"
     }
   ];
 
-  // Mock support tickets
-  const supportTickets = [
+  // Use live support tickets data
+  const supportTickets = liveData.supportTickets.length > 0 ? liveData.supportTickets : [
     {
-      id: "TKT-001",
-      title: "Chatbot Response Accuracy Issue",
-      description: "The chatbot is providing incorrect responses for product pricing queries",
+      id: "TKT-000",
+      title: "No Support Tickets",
+      description: "Submit contact forms to create support tickets here",
       status: "Open",
-      priority: "High",
-      category: "Technical",
-      createdDate: "Dec 5, 2024",
-      responseTime: "< 2 hours"
-    },
-    {
-      id: "TKT-002",
-      title: "Invoice Processing Delay",
-      description: "Some invoices are taking longer than expected to process",
-      status: "In Progress",
-      priority: "Medium",
-      category: "Performance",
-      createdDate: "Dec 3, 2024",
-      responseTime: "< 4 hours"
-    },
-    {
-      id: "TKT-003",
-      title: "User Access Request",
-      description: "Need to add new team member to the dashboard",
-      status: "Resolved",
       priority: "Low",
-      category: "Access",
-      createdDate: "Dec 1, 2024",
-      responseTime: "< 1 hour"
+      category: "General",
+      createdDate: new Date().toLocaleDateString(),
+      responseTime: "< 4 hours"
     }
   ];
 

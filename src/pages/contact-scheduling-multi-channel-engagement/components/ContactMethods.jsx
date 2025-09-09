@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import { saveSubmission } from '../../../utils/store';
 
 const ContactMethods = ({ onMethodSelect }) => {
   const [selectedMethod, setSelectedMethod] = useState(null);
+  const navigate = useNavigate();
 
   const contactMethods = [
     {
@@ -81,6 +84,42 @@ const ContactMethods = ({ onMethodSelect }) => {
   const handleMethodClick = (method) => {
     setSelectedMethod(method?.id);
     onMethodSelect(method);
+    
+    // Handle specific actions based on method
+    const payload = {
+      type: 'contact_method_selected',
+      method: method?.id,
+      timestamp: new Date().toISOString()
+    };
+    saveSubmission('contact_interactions', payload);
+    
+    switch (method?.id) {
+      case 'consultation':
+        navigate('/contact-scheduling-multi-channel-engagement');
+        break;
+      case 'whatsapp':
+        window.open(`https://wa.me/918252472186`, '_blank');
+        break;
+      case 'email':
+        const subject = encodeURIComponent('AI Automation Inquiry');
+        const body = encodeURIComponent(`Hi Team,\n\nI am interested in AI automation services.\n\nPlease contact me to discuss further.\n\nBest regards`);
+        window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+        break;
+      case 'phone':
+        window.location.href = 'tel:+918252472186';
+        break;
+      case 'livechat':
+        // Open LinkedIn for chat
+        window.open('https://linkedin.com/in/akashkumar-webdev', '_blank');
+        break;
+      case 'emergency':
+        const emergencySubject = encodeURIComponent('URGENT: Emergency Support Required');
+        const emergencyBody = encodeURIComponent(`URGENT SUPPORT REQUEST\n\nClient: \nIssue: \nPriority: Critical\n\nPlease contact immediately.\n\nPhone: +91 8252472186`);
+        window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${emergencySubject}&body=${emergencyBody}`;
+        break;
+      default:
+        break;
+    }
   };
 
   const getColorClasses = (color) => {

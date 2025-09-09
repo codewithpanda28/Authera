@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
+import { saveSubmission } from '../../../utils/store';
 
 const TestimonialSection = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const navigate = useNavigate();
 
   const testimonials = [
     {
@@ -70,6 +73,20 @@ const TestimonialSection = () => {
   };
 
   const current = testimonials?.[currentTestimonial];
+
+  const handleShareSuccessStory = () => {
+    const payload = {
+      type: 'success_story_request',
+      action: 'share_success_story',
+      timestamp: new Date().toISOString()
+    };
+    saveSubmission('portfolio_interactions', payload);
+    
+    const subject = encodeURIComponent('Share Your Success Story - AI Automation Hub');
+    const body = encodeURIComponent(`Hi Team,\n\nI would like to share my success story with AI automation:\n\nCompany: \nIndustry: \nResults achieved: \n\nPlease contact me to discuss further.\n\nBest regards`);
+    window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+    navigate('/contact-scheduling-multi-channel-engagement');
+  };
 
   return (
     <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
@@ -207,6 +224,7 @@ const TestimonialSection = () => {
               className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 cta-morph"
               iconName="MessageSquare"
               iconPosition="left"
+              onClick={handleShareSuccessStory}
             >
               Share Your Success Story
             </Button>

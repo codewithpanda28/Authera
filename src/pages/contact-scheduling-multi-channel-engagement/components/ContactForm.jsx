@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 import Input from '../../../components/ui/Input';
 import Select from '../../../components/ui/Select';
+import { saveSubmission } from '../../../utils/store';
 
 const ContactForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -56,8 +59,21 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
+      // Save form data to localStorage
+      const payload = {
+        type: 'contact_form',
+        data: formData,
+        timestamp: new Date().toISOString()
+      };
+      saveSubmission('contact_forms', payload);
+      
+      // Send email
+      const subject = encodeURIComponent(`Contact Form: ${formData?.subject || 'AI Automation Inquiry'}`);
+      const body = encodeURIComponent(`New Contact Form Submission:\n\nName: ${formData?.name}\nEmail: ${formData?.email}\nCompany: ${formData?.company}\nPhone: ${formData?.phone}\nService Type: ${formData?.serviceType}\nPriority: ${formData?.priority}\nPreferred Contact: ${formData?.preferredContact}\nNewsletter: ${formData?.newsletter ? 'Yes' : 'No'}\n\nMessage:\n${formData?.message}\n\nPhone: +91 8252472186`);
+      window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+      
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       console.log('Form submitted:', formData);
       setSubmitStatus('success');
@@ -75,6 +91,11 @@ const ContactForm = () => {
         preferredContact: 'email',
         newsletter: false
       });
+      
+      // Navigate to dashboard after 2 seconds
+      setTimeout(() => {
+        navigate('/client-dashboard-project-command-center');
+      }, 2000);
     } catch (error) {
       setSubmitStatus('error');
     } finally {
