@@ -66,16 +66,24 @@ const ContactForm = () => {
         timestamp: new Date().toISOString()
       };
       saveSubmission('contact_forms', payload);
-      
-      // Send email
-      const subject = encodeURIComponent(`Contact Form: ${formData?.subject || 'AI Automation Inquiry'}`);
-      const body = encodeURIComponent(`New Contact Form Submission:\n\nName: ${formData?.name}\nEmail: ${formData?.email}\nCompany: ${formData?.company}\nPhone: ${formData?.phone}\nService Type: ${formData?.serviceType}\nPriority: ${formData?.priority}\nPreferred Contact: ${formData?.preferredContact}\nNewsletter: ${formData?.newsletter ? 'Yes' : 'No'}\n\nMessage:\n${formData?.message}\n\nPhone: +91 8252472186`);
-      window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      console.log('Form submitted:', formData);
+      // Send to backend
+      const response = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData?.name,
+          email: formData?.email,
+          message: formData?.message,
+          phone: formData?.phone || null,
+          subject: formData?.subject || null,
+          serviceType: formData?.serviceType || null,
+          priority: formData?.priority || null,
+          preferredContact: formData?.preferredContact || null,
+          newsletter: !!formData?.newsletter,
+          company: formData?.company || null
+        })
+      });
+      if (!response.ok) throw new Error('Failed to submit');
       setSubmitStatus('success');
       
       // Reset form

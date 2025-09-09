@@ -262,6 +262,9 @@ const OfficeLocations = () => {
                     className="bg-accent hover:bg-accent/90"
                     iconName="Calendar"
                     iconPosition="left"
+                    onClick={() => {
+                      window.open(`https://wa.me/918252472186?text=${encodeURIComponent('I want to schedule a visit to ' + currentLocation?.name)}`,'_blank');
+                    }}
                   >
                     Schedule Visit
                   </Button>
@@ -270,6 +273,9 @@ const OfficeLocations = () => {
                     className="border-secondary text-secondary hover:bg-secondary hover:text-white"
                     iconName="Navigation"
                     iconPosition="left"
+                    onClick={() => {
+                      window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(currentLocation?.address)}`,'_blank');
+                    }}
                   >
                     Get Directions
                   </Button>
@@ -278,6 +284,7 @@ const OfficeLocations = () => {
                     className="border-primary text-primary hover:bg-primary hover:text-white"
                     iconName="Phone"
                     iconPosition="left"
+                    onClick={() => { window.location.href = `tel:${currentLocation?.phone?.replace(/\s/g,'')}`; }}
                   >
                     Call Office
                   </Button>

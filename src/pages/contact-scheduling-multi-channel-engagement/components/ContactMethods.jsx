@@ -30,7 +30,7 @@ const ContactMethods = ({ onMethodSelect }) => {
       responseTime: '< 2 minutes',
       bestFor: 'Quick questions & updates',
       action: 'Chat Now',
-      phone: '+91 98765 43210'
+      phone: '+91 8252472186'
     },
     {
       id: 'email',
@@ -42,7 +42,7 @@ const ContactMethods = ({ onMethodSelect }) => {
       responseTime: '< 4 hours',
       bestFor: 'Complex requirements',
       action: 'Send Email',
-      email: 'hello@aiautomationhub.com'
+      email: 'akashkumar.webdev@gmail.com'
     },
     {
       id: 'phone',
@@ -54,7 +54,7 @@ const ContactMethods = ({ onMethodSelect }) => {
       responseTime: 'Immediate',
       bestFor: 'Urgent matters',
       action: 'Call Now',
-      phone: '+91 98765 43210'
+      phone: '+91 8252472186'
     },
     {
       id: 'livechat',
@@ -110,7 +110,7 @@ const ContactMethods = ({ onMethodSelect }) => {
         break;
       case 'livechat':
         // Open LinkedIn for chat
-        window.open('https://linkedin.com/in/akashkumar-webdev', '_blank');
+        window.open('https://www.linkedin.com/in/codewithpanda28', '_blank');
         break;
       case 'emergency':
         const emergencySubject = encodeURIComponent('URGENT: Emergency Support Required');

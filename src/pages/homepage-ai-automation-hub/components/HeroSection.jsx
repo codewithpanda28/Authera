@@ -72,18 +72,17 @@ const HeroSection = () => {
             {/* Main Headline */}
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                AI Automation That
-                <span className="block bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent">
-                  Delivers Measurable ROI
+              Next-Gen AI 
+                <span className="block bg-gradient-to-r from-accent to-accent/100 bg-clip-text text-transparent">
+                Agents for Seamless
                 </span>
-                <span className="block text-3xl md:text-4xl lg:text-5xl text-white/90">
-                  From Day One
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-white/90">
+                Business Automation
                 </span>
               </h1>
               
               <p className="text-xl text-white/80 leading-relaxed max-w-2xl">
-                Transform your business processes with intelligent automation solutions that deliver proven results. 
-                Join 500+ companies saving 40+ hours weekly while boosting revenue by 300%.
+              Practical, high-impact AI solutions that streamline processes and let businesses focus on what truly matters.
               </p>
             </div>
 

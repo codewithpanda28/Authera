@@ -41,7 +41,7 @@ const EmergencySupport = () => {
       color: 'destructive',
       responseTime: '< 5 minutes',
       availability: '24/7',
-      phone: '+91 98765 99999',
+      phone: '+91 8252472186',
       features: ['Immediate escalation', 'Senior engineer response', 'Screen sharing support']
     },
     {
@@ -52,7 +52,7 @@ const EmergencySupport = () => {
       color: 'success',
       responseTime: '< 10 minutes',
       availability: '24/7',
-      phone: '+91 98765 88888',
+      phone: '+91 8252472186',
       features: ['File sharing', 'Voice messages', 'Priority queue']
     },
     {
@@ -63,7 +63,7 @@ const EmergencySupport = () => {
       color: 'warning',
       responseTime: '< 15 minutes',
       availability: '24/7',
-      email: 'emergency@aiautomationhub.com',
+      email: 'akashkumar.webdev@gmail.com',
       features: ['Auto-escalation', 'Ticket tracking', 'Multi-team coordination']
     }
   ];
@@ -222,6 +222,13 @@ const EmergencySupport = () => {
                 }
                 iconName={channel?.icon}
                 iconPosition="left"
+                onClick={() => {
+                  if (channel?.phone) {
+                    window.location.href = `tel:${channel.phone.replace(/\s/g,'')}`;
+                  } else if (channel?.email) {
+                    window.location.href = `mailto:${channel.email}`;
+                  }
+                }}
               >
                 Contact Now
               </Button>

@@ -88,9 +88,19 @@ const AssessmentTool = () => {
     }
   };
 
-  const generateReport = () => {
-    // Mock report generation
-    alert('Assessment complete! Your customized automation report will be sent to your email within 5 minutes.');
+  const generateReport = async () => {
+    try {
+      await fetch('/api/submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'assessment',
+          email: formData?.email,
+          payload: formData
+        })
+      });
+    } catch {}
+    alert('Assessment submitted! We will email your report shortly.');
   };
 
   const renderStep = () => {

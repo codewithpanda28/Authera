@@ -35,7 +35,7 @@ const SolutionConfigurator = () => {
         inr: { setup: 75000, monthly: 15000 },
         usd: { setup: 900, monthly: 180 }
       },
-      features: ['Process Designer', 'Approval Workflows', 'Task Management', 'Notifications'],
+      features: ['Process Designer', 'Approval Workflows', 'Task Management', 'Notifications', 'SLA Policies', 'Audit Trails'],
       popular: true
     },
     {
@@ -48,7 +48,7 @@ const SolutionConfigurator = () => {
         inr: { setup: 50000, monthly: 12000 },
         usd: { setup: 600, monthly: 144 }
       },
-      features: ['OCR Technology', 'Data Extraction', 'Document Classification', 'Validation Rules']
+      features: ['OCR Technology', 'Data Extraction', 'Document Classification', 'Validation Rules', 'Template Library', 'Human Review UI']
     },
     {
       id: 'chatbot',
@@ -60,7 +60,7 @@ const SolutionConfigurator = () => {
         inr: { setup: 60000, monthly: 18000 },
         usd: { setup: 720, monthly: 216 }
       },
-      features: ['NLP Engine', 'Multi-channel Support', 'Analytics Dashboard', 'Human Handoff']
+      features: ['NLP Engine', 'Multi-channel Support', 'Analytics Dashboard', 'Human Handoff', 'Knowledge Base', 'Fine-tuning Tools']
     },
     {
       id: 'analytics',
@@ -72,7 +72,7 @@ const SolutionConfigurator = () => {
         inr: { setup: 100000, monthly: 25000 },
         usd: { setup: 1200, monthly: 300 }
       },
-      features: ['Custom Dashboards', 'Predictive Analytics', 'Automated Reports', 'Data Visualization']
+      features: ['Custom Dashboards', 'Predictive Analytics', 'Automated Reports', 'Data Visualization', 'Drill-down Insights', 'Anomaly Detection']
     },
     {
       id: 'integration',
@@ -84,7 +84,7 @@ const SolutionConfigurator = () => {
         inr: { setup: 125000, monthly: 20000 },
         usd: { setup: 1500, monthly: 240 }
       },
-      features: ['API Development', 'Database Sync', 'Real-time Updates', 'Security Protocols']
+      features: ['API Development', 'Database Sync', 'Real-time Updates', 'Security Protocols', 'Webhook Orchestration', 'ETL Pipelines']
     },
     {
       id: 'mobile-app',
@@ -96,7 +96,7 @@ const SolutionConfigurator = () => {
         inr: { setup: 80000, monthly: 15000 },
         usd: { setup: 960, monthly: 180 }
       },
-      features: ['Native Apps', 'Push Notifications', 'Offline Sync', 'User Management']
+      features: ['Native Apps', 'Push Notifications', 'Offline Sync', 'User Management', 'Biometric Login', 'Deep Linking']
     },
     {
       id: 'security',
@@ -108,7 +108,7 @@ const SolutionConfigurator = () => {
         inr: { setup: 90000, monthly: 22000 },
         usd: { setup: 1080, monthly: 264 }
       },
-      features: ['Encryption', 'Access Control', 'Audit Logs', 'Compliance Reports']
+      features: ['Encryption', 'Access Control', 'Audit Logs', 'Compliance Reports', 'SSO/OAuth', 'Data Masking']
     },
     {
       id: 'training',
@@ -120,7 +120,7 @@ const SolutionConfigurator = () => {
         inr: { setup: 40000, monthly: 10000 },
         usd: { setup: 480, monthly: 120 }
       },
-      features: ['Video Tutorials', 'Live Training', '24/7 Support', 'Documentation']
+      features: ['Video Tutorials', 'Live Training', '24/7 Support', 'Documentation', 'Dedicated CSM', 'Success Planning']
     }
   ];
 
@@ -173,7 +173,7 @@ const SolutionConfigurator = () => {
     return modules?.filter(module => module.category === category);
   };
 
-  const handleGetQuote = () => {
+  const handleGetQuote = async () => {
     if (selectedModules?.length === 0) return;
     const payload = {
       type: 'quote',
@@ -183,13 +183,13 @@ const SolutionConfigurator = () => {
       totals: totalCost
     };
     saveSubmission('quotes', payload);
-    const subject = encodeURIComponent('Request for Detailed Quote');
-    const body = encodeURIComponent(`Quote request details:\n\n${JSON.stringify(payload, null, 2)}\n\nPhone: +91 8252472186`);
-    window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      await fetch('/api/submissions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'quotes', payload }) });
+    } catch {}
     navigate('/client-dashboard-project-command-center');
   };
 
-  const handleScheduleConsultation = () => {
+  const handleScheduleConsultation = async () => {
     if (selectedModules?.length === 0) return;
     const payload = {
       type: 'consultation',
@@ -199,13 +199,13 @@ const SolutionConfigurator = () => {
       totals: totalCost
     };
     saveSubmission('consultations', payload);
-    const subject = encodeURIComponent('Schedule Consultation');
-    const body = encodeURIComponent(`Consultation request:\n\n${JSON.stringify(payload, null, 2)}\n\nPhone: +91 8252472186`);
-    window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      await fetch('/api/submissions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'consultations', payload }) });
+    } catch {}
     navigate('/contact-scheduling-multi-channel-engagement');
   };
 
-  const handleDownloadProposal = () => {
+  const handleDownloadProposal = async () => {
     if (selectedModules?.length === 0) return;
     const payload = {
       type: 'proposal',
@@ -215,6 +215,9 @@ const SolutionConfigurator = () => {
       totals: totalCost
     };
     saveSubmission('proposals', payload);
+    try {
+      await fetch('/api/submissions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'proposals', payload }) });
+    } catch {}
     // Generate a basic proposal blob to download
     const content = `AI Automation Proposal\n\n${JSON.stringify(payload, null, 2)}`;
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
@@ -321,7 +324,7 @@ const SolutionConfigurator = () => {
                           
                           <div className="mt-3 pt-3 border-t border-gray-200">
                             <div className="flex flex-wrap gap-1">
-                              {module.features?.slice(0, 2)?.map((feature, index) => (
+                              {module.features?.slice(0, 4)?.map((feature, index) => (
                                 <span key={index} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
                                   {feature}
                                 </span>
@@ -331,6 +334,17 @@ const SolutionConfigurator = () => {
                                   +{module.features?.length - 2} more
                                 </span>
                               )}
+                            </div>
+                            <div className="mt-3">
+                              <a
+                                href={`https://wa.me/918252472186?text=${encodeURIComponent('I want to discuss: ' + module.name)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:text-blue-800 text-sm underline"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                Discuss this project on WhatsApp
+                              </a>
                             </div>
                           </div>
                         </div>

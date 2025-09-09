@@ -11,6 +11,10 @@ import SupportTickets from './components/SupportTickets';
 import PerformanceChart from './components/PerformanceChart';
 import ResourceLibrary from './components/ResourceLibrary';
 import BillingOverview from './components/BillingOverview';
+import ContactsAdmin from './components/ContactsAdmin';
+import BlogsAdmin from './components/BlogsAdmin';
+import PurchasesAdmin from './components/PurchasesAdmin';
+import SubmissionsAdmin from './components/SubmissionsAdmin';
 import { getSubmissions } from '../../utils/store';
 
 const ClientDashboard = () => {
@@ -298,12 +302,7 @@ const ClientDashboard = () => {
   };
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: 'BarChart3' },
-    { id: 'projects', label: 'Projects', icon: 'FolderOpen' },
-    { id: 'performance', label: 'Performance', icon: 'TrendingUp' },
-    { id: 'resources', label: 'Resources', icon: 'BookOpen' },
-    { id: 'billing', label: 'Billing', icon: 'CreditCard' },
-    { id: 'support', label: 'Support', icon: 'MessageSquare' }
+    { id: 'submissions', label: 'Submissions', icon: 'Database' }
   ];
 
   const handleProjectDetails = (project) => {
@@ -406,133 +405,16 @@ const ClientDashboard = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'overview':
-        return (
-          <div className="space-y-8">
-            {/* Metrics Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {metrics?.map((metric) => (
-                <MetricsCard key={metric?.id} metric={metric} />
-              ))}
-            </div>
-            {/* Main Content Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 space-y-8">
-                <PerformanceChart 
-                  data={performanceData} 
-                  title="Automation Performance" 
-                  type="line" 
-                />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {projects?.slice(0, 2)?.map((project) => (
-                    <ProjectCard 
-                      key={project?.id} 
-                      project={project} 
-                      onViewDetails={handleProjectDetails} 
-                    />
-                  ))}
-                </div>
-              </div>
-              <div className="space-y-8">
-                <ActivityFeed activities={activities} />
-              </div>
-            </div>
-          </div>
-        );
-
-      case 'projects':
+      case 'submissions':
         return (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-text-primary">Projects</h2>
-                <p className="text-text-secondary">Track your automation implementation progress</p>
+                <h2 className="text-2xl font-bold text-text-primary">All Submissions</h2>
+                <p className="text-text-secondary">All forms: contact, consultations, quotes, purchases</p>
               </div>
-              <Button variant="default" iconName="Plus" iconPosition="left" onClick={handleRequestNewProject}>
-                Request New Project
-              </Button>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {projects?.map((project) => (
-                <ProjectCard 
-                  key={project?.id} 
-                  project={project} 
-                  onViewDetails={handleProjectDetails} 
-                />
-              ))}
-            </div>
-          </div>
-        );
-
-      case 'performance':
-        return (
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-bold text-text-primary">Performance Analytics</h2>
-              <p className="text-text-secondary">Monitor automation effectiveness and ROI</p>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-              {metrics?.map((metric) => (
-                <MetricsCard key={metric?.id} metric={metric} />
-              ))}
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <PerformanceChart 
-                data={performanceData} 
-                title="System Performance" 
-                type="line" 
-              />
-              <PerformanceChart 
-                data={costSavingsData} 
-                title="Monthly Cost Savings" 
-                type="bar" 
-              />
-            </div>
-          </div>
-        );
-
-      case 'resources':
-        return (
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-2xl font-bold text-text-primary">Resource Library</h2>
-              <p className="text-text-secondary">Access training materials and documentation</p>
-            </div>
-            <ResourceLibrary 
-              resources={resources}
-              onDownload={handleDownloadResource}
-              onView={handleViewResource}
-            />
-          </div>
-        );
-
-      case 'billing':
-        return (
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-2xl font-bold text-text-primary">Billing & ROI</h2>
-              <p className="text-text-secondary">Track costs, payments, and return on investment</p>
-            </div>
-            <BillingOverview 
-              billingData={billingData}
-              onViewInvoice={handleViewInvoice}
-              onMakePayment={handleMakePayment}
-            />
-          </div>
-        );
-
-      case 'support':
-        return (
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-2xl font-bold text-text-primary">Support Center</h2>
-              <p className="text-text-secondary">Get help and track your support requests</p>
-            </div>
-            <SupportTickets 
-              tickets={supportTickets}
-              onCreateTicket={handleCreateTicket}
-              onViewTicket={handleViewTicket}
-            />
+            <SubmissionsAdmin />
           </div>
         );
 

@@ -321,6 +321,11 @@ const CaseStudyModal = ({ caseStudy, isOpen, onClose }) => {
               size="sm"
               iconName="MessageSquare"
               iconPosition="left"
+              onClick={() => {
+                const message = `Hi! I'm interested in discussing a similar project to "${caseStudy?.title}". Could you help me with more details?`;
+                const whatsappUrl = `https://wa.me/918252472186?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+              }}
             >
               Discuss Similar Project
             </Button>

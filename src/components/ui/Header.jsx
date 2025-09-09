@@ -7,6 +7,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const [visitCount, setVisitCount] = useState(null);
   const navigate = useNavigate();
 
   const navigationItems = [
@@ -28,6 +29,13 @@ const Header = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/visits')
+      .then(r => r.json())
+      .then(d => setVisitCount(d?.count ?? 0))
+      .catch(() => {});
   }, []);
 
   const toggleMenu = () => {
@@ -147,6 +155,11 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
+            {typeof visitCount === 'number' && (
+              <div className="text-xs text-text-secondary mr-2">
+                Visits: <span className="font-semibold text-primary">{visitCount}</span>
+              </div>
+            )}
             <Button
               variant="outline"
               size="sm"

@@ -53,8 +53,8 @@ const ProjectCard = ({ project, onViewDetails }) => {
           />
         </div>
       </div>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+        <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center space-x-1">
             <Icon name="Users" size={16} className="text-text-secondary" />
             <span className="text-sm text-text-secondary">{project?.teamSize} members</span>
@@ -63,16 +63,23 @@ const ProjectCard = ({ project, onViewDetails }) => {
             <Icon name="Clock" size={16} className="text-text-secondary" />
             <span className="text-sm text-text-secondary">{project?.timeRemaining}</span>
           </div>
+          {project?.submissionData && (
+            <div className="text-xs text-text-secondary truncate max-w-[280px]">
+              Modules: {Array.isArray(project?.submissionData?.data?.modules) ? project?.submissionData?.data?.modules?.join(', ') : '—'}
+            </div>
+          )}
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => onViewDetails(project)}
-          iconName="ArrowRight"
-          iconPosition="right"
-        >
-          View Details
-        </Button>
+        <div className="flex items-center justify-end">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onViewDetails(project)}
+            iconName="ArrowRight"
+            iconPosition="right"
+          >
+            View Details
+          </Button>
+        </div>
       </div>
     </div>
   );

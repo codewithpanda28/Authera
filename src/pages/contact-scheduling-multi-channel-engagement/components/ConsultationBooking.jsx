@@ -90,15 +90,18 @@ const ConsultationBooking = ({ isVisible, onClose }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e?.preventDefault();
-    const record = saveSubmission('consultations', formData);
-    const subject = encodeURIComponent('New Consultation Booking');
-    const body = encodeURIComponent(`New booking details:\n\n${JSON.stringify(formData, null, 2)}\n\nPhone: +91 8252472186`);
-    window.location.href = `mailto:akashkumar.webdev@gmail.com?subject=${subject}&body=${body}`;
+    saveSubmission('consultations', formData);
+    try {
+      await fetch('/api/submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'consultations', name: formData.name, email: formData.email, phone: formData.phone, payload: formData })
+      });
+    } catch {}
     onClose?.();
     navigate('/client-dashboard-project-command-center');
-    alert('Consultation booked successfully! We have emailed the details.');
   };
 
   if (!isVisible) return null;

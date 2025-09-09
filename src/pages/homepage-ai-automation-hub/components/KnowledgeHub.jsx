@@ -59,35 +59,20 @@ const KnowledgeHub = () => {
     }
   ];
 
-  const premiumResources = [
-    {
-      title: "AI Automation Implementation Playbook",
-      description: "Step-by-step guide with templates, checklists, and best practices",
-      type: "PDF Guide",
-      price: "₹2,999",
-      originalPrice: "₹4,999",
-      downloads: "1,200+",
-      rating: 4.9
-    },
-    {
-      title: "ROI Calculation Templates & Tools",
-      description: "Excel templates and calculators for measuring automation success",
-      type: "Excel Templates",
-      price: "₹1,499",
-      originalPrice: "₹2,499",
-      downloads: "800+",
-      rating: 4.8
-    },
-    {
-      title: "Industry-Specific Automation Strategies",
-      description: "Tailored approaches for different industries and business sizes",
-      type: "Video Course",
-      price: "₹5,999",
-      originalPrice: "₹8,999",
-      downloads: "600+",
-      rating: 4.9
-    }
+  const [resourcePage, setResourcePage] = useState(0);
+  const resourcesPool = [
+    [
+      { title: "AI Agent SaaS Starter", description: "Full-stack AI agent boilerplate (auth, billing, chat)", details: "Next.js + Node API + Stripe + Auth + vector store integration. Includes multitenancy-ready patterns.", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=500&fit=crop", docUrl: "https://example.com/ai-agent-saas-docs.pdf", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", type: "SaaS Project", price: "₹14,999", originalPrice: "₹24,999", downloads: "120+", rating: 4.9 },
+      { title: "AI Automation Playbook", description: "Templates, checklists, best practices", details: "Covers discovery → design → delivery with editable templates.", image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=800&h=500&fit=crop", docUrl: "https://example.com/automation-playbook.pdf", type: "PDF Guide", price: "₹2,999", originalPrice: "₹4,999", downloads: "1,200+", rating: 4.9 },
+      { title: "ROI Templates & Tools", description: "Excel templates for measuring ROI", details: "CAC/LTV, payback, and automation ROI calculators.", image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&h=500&fit=crop", docUrl: "https://example.com/roi-tools.xlsx", type: "Excel Templates", price: "₹1,499", originalPrice: "₹2,499", downloads: "800+", rating: 4.8 }
+    ],
+    [
+      { title: "Industry Strategies", description: "Automation for different industries", details: "Sector-specific blueprints for manufacturing, healthcare, BFSI.", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=500&fit=crop", videoUrl: "https://www.youtube.com/watch?v=oHg5SJYRHA0", docUrl: "https://example.com/industry-strategies.pdf", type: "Video Course", price: "₹5,999", originalPrice: "₹8,999", downloads: "600+", rating: 4.9 },
+      { title: "Chatbot Kit", description: "Production-ready chatbot starter", details: "Includes channel adapters (web/WA), analytics, human handoff.", image: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=800&h=500&fit=crop", docUrl: "https://example.com/chatbot-kit-docs.pdf", type: "SaaS Project", price: "₹9,999", originalPrice: "₹15,999", downloads: "300+", rating: 4.8 },
+      { title: "Analytics Dashboards", description: "BI dashboards starter pack", details: "KPI widgets, drilldowns, and export-ready charts.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop", docUrl: "https://example.com/analytics-dashboards.pdf", type: "UI Pack", price: "₹1,999", originalPrice: "₹3,499", downloads: "450+", rating: 4.7 }
+    ]
   ];
+  const premiumResources = resourcesPool[resourcePage % resourcesPool.length];
 
   const handleNewsletterSignup = (e) => {
     e?.preventDefault();
@@ -258,7 +243,13 @@ const KnowledgeHub = () => {
 
               <div className="space-y-4">
                 {premiumResources?.map((resource, index) => (
-                  <div key={index} className="border border-gray-100 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <div key={index} className="border border-gray-100 rounded-lg p-0 overflow-hidden hover:shadow-md transition-shadow">
+                    {resource?.image && (
+                      <div className="w-full h-32 bg-gray-100 overflow-hidden">
+                        <img src={resource.image} alt={resource.title} className="w-full h-full object-cover" />
+                      </div>
+                    )}
+                    <div className="p-4">
                     <div className="flex items-start justify-between mb-2">
                       <h4 className="font-semibold text-primary text-sm leading-tight">{resource?.title}</h4>
                       <span className="bg-warning/10 text-warning px-2 py-1 rounded text-xs font-medium">
@@ -269,6 +260,11 @@ const KnowledgeHub = () => {
                     <p className="text-text-secondary text-xs mb-3 leading-relaxed">
                       {resource?.description}
                     </p>
+                    {resource?.details && (
+                      <p className="text-[11px] text-text-secondary/90 mb-3 leading-relaxed">
+                        {resource.details}
+                      </p>
+                    )}
 
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center space-x-2">
@@ -283,9 +279,32 @@ const KnowledgeHub = () => {
 
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-text-secondary">{resource?.downloads} downloads</span>
-                      <Button variant="outline" size="xs" iconName="Download" onClick={() => navigate('/services-universe-interactive-solutions')}>
+                      <div className="flex items-center gap-2">
+                      {resource?.docUrl && (
+                        <Button variant="ghost" size="xs" iconName="FileText" onClick={() => window.open(resource.docUrl, '_blank')}>
+                          Docs
+                        </Button>
+                      )}
+                      {resource?.videoUrl && (
+                        <Button variant="ghost" size="xs" iconName="Play" onClick={() => window.open(resource.videoUrl, '_blank')}>
+                          Preview
+                        </Button>
+                      )}
+                      <Button
+                        variant="outline"
+                        size="xs"
+                        iconName="Download"
+                        onClick={async () => {
+                          try {
+                            await fetch('/api/purchases', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userName: 'Website Visitor', userEmail: 'unknown@user.com', projectId: resource.title.replace(/\s+/g,'-').toLowerCase(), projectTitle: resource.title, message: `Interested in ${resource.title}` }) });
+                          } catch {}
+                          window.open(`https://wa.me/918252472186?text=${encodeURIComponent('I want to buy: ' + resource.title)}`, '_blank');
+                        }}
+                      >
                         Get Now
                       </Button>
+                      </div>
+                    </div>
                     </div>
                   </div>
                 ))}
@@ -297,7 +316,7 @@ const KnowledgeHub = () => {
                 className="w-full mt-6 bg-gradient-to-r from-warning to-warning/80"
                 iconName="ShoppingCart"
                 iconPosition="left"
-                onClick={() => navigate('/services-universe-interactive-solutions')}
+                onClick={() => setResourcePage((p) => p + 1)}
               >
                 Browse All Resources
               </Button>
