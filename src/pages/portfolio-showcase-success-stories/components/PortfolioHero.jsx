@@ -6,7 +6,7 @@ import { saveSubmission } from '../../../utils/store';
 
 const PortfolioHero = () => {
   const stats = [
-    { number: "150+", label: "Projects Delivered", icon: "CheckCircle" },
+    { number: "2+", label: "Projects Delivered", icon: "CheckCircle" },
     { number: "98%", label: "Client Satisfaction", icon: "Heart" },
     { number: "45%", label: "Average ROI Increase", icon: "TrendingUp" },
     { number: "12", label: "Industries Served", icon: "Building" }

@@ -148,135 +148,135 @@ const PortfolioShowcase = () => {
         position: "CFO"
       }
     },
-    {
-      id: 4,
-      title: "Healthcare Patient Management System for MediCare Plus",
-      description: "Automated patient scheduling and management system improving efficiency by 60% and reducing wait times",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop",
-      industry: "Healthcare",
-      industryIcon: "Heart",
-      client: "MediCare Plus Hospital",
-      location: "Delhi, India",
-      timeline: "5 months",
-      rating: 5,
-      isPremium: false,
-      technologies: ["Healthcare APIs", "Scheduling Algorithms", "Patient Portal", "Mobile App", "Cloud Security"],
-      metrics: [
-        { value: "60%", label: "Efficiency Improvement" },
-        { value: "40%", label: "Reduced Wait Times" },
-        { value: "95%", label: "Patient Satisfaction" }
-      ],
-      challenge: `MediCare Plus Hospital faced challenges with manual patient scheduling, long wait times, and inefficient resource allocation. The paper-based system was causing delays and patient dissatisfaction.`,
-      solution: `We developed an intelligent patient management system with automated scheduling, resource optimization, and patient communication features. The solution included mobile apps for patients and staff dashboards for real-time monitoring.`,
-      beforeMetrics: [
-        "Average wait time of 45 minutes",
-        "Manual scheduling conflicts",
-        "Patient satisfaction at 70%",
-        "High administrative workload"
-      ],
-      afterMetrics: [
-        "Wait time reduced to 15 minutes",
-        "Zero scheduling conflicts",
-        "Patient satisfaction at 95%",
-        "60% reduction in admin tasks"
-      ],
-      achievements: [
-        { value: "₹80L", label: "Annual Savings" },
-        { value: "500+", label: "Patients/Day" },
-        { value: "Zero", label: "Scheduling Errors" }
-      ],
-      testimonial: {
-        quote: "The patient management system has transformed our hospital operations. We\'ve reduced wait times by 40% and improved patient satisfaction to 95%.",
-        author: "Dr. Anita Verma",
-        position: "Hospital Administrator"
-      }
-    },
-    {
-      id: 5,
-      title: "Supply Chain Optimization for LogiFlow International",
-      description: "AI-powered supply chain automation reducing delivery times by 35% and cutting logistics costs by 25%",
-      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop",
-      industry: "Logistics",
-      industryIcon: "Truck",
-      client: "LogiFlow International",
-      location: "Dubai, UAE",
-      timeline: "6 months",
-      rating: 5,
-      isPremium: true,
-      technologies: ["Route Optimization", "IoT Tracking", "Predictive Analytics", "Mobile Apps", "API Integration"],
-      metrics: [
-        { value: "35%", label: "Faster Delivery" },
-        { value: "25%", label: "Cost Reduction" },
-        { value: "99%", label: "On-time Delivery" }
-      ],
-      challenge: `LogiFlow International struggled with inefficient route planning, high fuel costs, and delayed deliveries. The manual logistics management was causing customer dissatisfaction and increased operational expenses.`,
-      solution: `We implemented an AI-powered supply chain optimization platform with real-time tracking, intelligent route planning, and predictive maintenance. The system integrated with existing ERP and provided mobile apps for drivers and customers.`,
-      beforeMetrics: [
-        "Average delivery delay of 2 days",
-        "High fuel consumption and costs",
-        "Limited shipment visibility",
-        "Customer complaints about delays"
-      ],
-      afterMetrics: [
-        "99% on-time delivery rate",
-        "25% reduction in fuel costs",
-        "Real-time shipment tracking",
-        "Customer satisfaction at 96%"
-      ],
-      achievements: [
-        { value: "$2.1M", label: "Annual Savings" },
-        { value: "50K+", label: "Shipments/Month" },
-        { value: "96%", label: "Customer Satisfaction" }
-      ],
-      testimonial: {
-        quote: "The supply chain optimization has revolutionized our logistics operations. We\'ve achieved 35% faster deliveries and 25% cost reduction.",
-        author: "Ahmed Al-Rashid",
-        position: "Operations Manager"
-      }
-    },
-    {
-      id: 6,
-      title: "Marketing Automation Platform for Digital Growth Agency",
-      description: "Comprehensive marketing automation increasing lead generation by 250% and improving conversion rates by 40%",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-      industry: "Marketing",
-      industryIcon: "Target",
-      client: "Digital Growth Agency",
-      location: "Bangalore, India",
-      timeline: "3 months",
-      rating: 5,
-      isPremium: false,
-      technologies: ["Marketing Automation", "CRM Integration", "Analytics", "Email Marketing", "Social Media APIs"],
-      metrics: [
-        { value: "250%", label: "More Leads" },
-        { value: "40%", label: "Higher Conversion" },
-        { value: "ROI+", label: "Positive ROI" }
-      ],
-      challenge: `Digital Growth Agency was struggling with manual marketing processes, low lead generation, and poor conversion tracking. The lack of automation was limiting their ability to scale and deliver results for clients.`,
-      solution: `We built a comprehensive marketing automation platform with lead scoring, email campaigns, social media integration, and advanced analytics. The system provided automated workflows and detailed performance tracking.`,
-      beforeMetrics: [
-        "Manual lead qualification process",
-        "Low email open rates at 15%",
-        "Limited campaign tracking",
-        "High client acquisition costs"
-      ],
-      afterMetrics: [
-        "Automated lead scoring and nurturing",
-        "Email open rates increased to 35%",
-        "Complete campaign attribution",
-        "40% reduction in acquisition costs"
-      ],
-      achievements: [
-        { value: "₹1.5Cr", label: "Client Revenue Impact" },
-        { value: "10K+", label: "Leads/Month" },
-        { value: "300%", label: "Agency Growth" }
-      ],
-      testimonial: {
-        quote: "The marketing automation platform exceeded our expectations. Lead generation increased by 250% and conversion rates improved by 40%. The ROI was evident within the first quarter.",
-        author: "Priya Sharma",
-        position: "Marketing Director"
-      }
-    }
+    // {
+    //   id: 4,
+    //   title: "Healthcare Patient Management System for MediCare Plus",
+    //   description: "Automated patient scheduling and management system improving efficiency by 60% and reducing wait times",
+    //   image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop",
+    //   industry: "Healthcare",
+    //   industryIcon: "Heart",
+    //   client: "MediCare Plus Hospital",
+    //   location: "Delhi, India",
+    //   timeline: "5 months",
+    //   rating: 5,
+    //   isPremium: false,
+    //   technologies: ["Healthcare APIs", "Scheduling Algorithms", "Patient Portal", "Mobile App", "Cloud Security"],
+    //   metrics: [
+    //     { value: "60%", label: "Efficiency Improvement" },
+    //     { value: "40%", label: "Reduced Wait Times" },
+    //     { value: "95%", label: "Patient Satisfaction" }
+    //   ],
+    //   challenge: `MediCare Plus Hospital faced challenges with manual patient scheduling, long wait times, and inefficient resource allocation. The paper-based system was causing delays and patient dissatisfaction.`,
+    //   solution: `We developed an intelligent patient management system with automated scheduling, resource optimization, and patient communication features. The solution included mobile apps for patients and staff dashboards for real-time monitoring.`,
+    //   beforeMetrics: [
+    //     "Average wait time of 45 minutes",
+    //     "Manual scheduling conflicts",
+    //     "Patient satisfaction at 70%",
+    //     "High administrative workload"
+    //   ],
+    //   afterMetrics: [
+    //     "Wait time reduced to 15 minutes",
+    //     "Zero scheduling conflicts",
+    //     "Patient satisfaction at 95%",
+    //     "60% reduction in admin tasks"
+    //   ],
+    //   achievements: [
+    //     { value: "₹80L", label: "Annual Savings" },
+    //     { value: "500+", label: "Patients/Day" },
+    //     { value: "Zero", label: "Scheduling Errors" }
+    //   ],
+    //   testimonial: {
+    //     quote: "The patient management system has transformed our hospital operations. We\'ve reduced wait times by 40% and improved patient satisfaction to 95%.",
+    //     author: "Dr. Anita Verma",
+    //     position: "Hospital Administrator"
+    //   }
+    // },
+    // {
+    //   id: 5,
+    //   title: "Supply Chain Optimization for LogiFlow International",
+    //   description: "AI-powered supply chain automation reducing delivery times by 35% and cutting logistics costs by 25%",
+    //   image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop",
+    //   industry: "Logistics",
+    //   industryIcon: "Truck",
+    //   client: "LogiFlow International",
+    //   location: "Dubai, UAE",
+    //   timeline: "6 months",
+    //   rating: 5,
+    //   isPremium: true,
+    //   technologies: ["Route Optimization", "IoT Tracking", "Predictive Analytics", "Mobile Apps", "API Integration"],
+    //   metrics: [
+    //     { value: "35%", label: "Faster Delivery" },
+    //     { value: "25%", label: "Cost Reduction" },
+    //     { value: "99%", label: "On-time Delivery" }
+    //   ],
+    //   challenge: `LogiFlow International struggled with inefficient route planning, high fuel costs, and delayed deliveries. The manual logistics management was causing customer dissatisfaction and increased operational expenses.`,
+    //   solution: `We implemented an AI-powered supply chain optimization platform with real-time tracking, intelligent route planning, and predictive maintenance. The system integrated with existing ERP and provided mobile apps for drivers and customers.`,
+    //   beforeMetrics: [
+    //     "Average delivery delay of 2 days",
+    //     "High fuel consumption and costs",
+    //     "Limited shipment visibility",
+    //     "Customer complaints about delays"
+    //   ],
+    //   afterMetrics: [
+    //     "99% on-time delivery rate",
+    //     "25% reduction in fuel costs",
+    //     "Real-time shipment tracking",
+    //     "Customer satisfaction at 96%"
+    //   ],
+    //   achievements: [
+    //     { value: "$2.1M", label: "Annual Savings" },
+    //     { value: "50K+", label: "Shipments/Month" },
+    //     { value: "96%", label: "Customer Satisfaction" }
+    //   ],
+    //   testimonial: {
+    //     quote: "The supply chain optimization has revolutionized our logistics operations. We\'ve achieved 35% faster deliveries and 25% cost reduction.",
+    //     author: "Ahmed Al-Rashid",
+    //     position: "Operations Manager"
+    //   }
+    // },
+    // {
+    //   id: 6,
+    //   title: "Marketing Automation Platform for Digital Growth Agency",
+    //   description: "Comprehensive marketing automation increasing lead generation by 250% and improving conversion rates by 40%",
+    //   image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+    //   industry: "Marketing",
+    //   industryIcon: "Target",
+    //   client: "Digital Growth Agency",
+    //   location: "Bangalore, India",
+    //   timeline: "3 months",
+    //   rating: 5,
+    //   isPremium: false,
+    //   technologies: ["Marketing Automation", "CRM Integration", "Analytics", "Email Marketing", "Social Media APIs"],
+    //   metrics: [
+    //     { value: "250%", label: "More Leads" },
+    //     { value: "40%", label: "Higher Conversion" },
+    //     { value: "ROI+", label: "Positive ROI" }
+    //   ],
+    //   challenge: `Digital Growth Agency was struggling with manual marketing processes, low lead generation, and poor conversion tracking. The lack of automation was limiting their ability to scale and deliver results for clients.`,
+    //   solution: `We built a comprehensive marketing automation platform with lead scoring, email campaigns, social media integration, and advanced analytics. The system provided automated workflows and detailed performance tracking.`,
+    //   beforeMetrics: [
+    //     "Manual lead qualification process",
+    //     "Low email open rates at 15%",
+    //     "Limited campaign tracking",
+    //     "High client acquisition costs"
+    //   ],
+    //   afterMetrics: [
+    //     "Automated lead scoring and nurturing",
+    //     "Email open rates increased to 35%",
+    //     "Complete campaign attribution",
+    //     "40% reduction in acquisition costs"
+    //   ],
+    //   achievements: [
+    //     { value: "₹1.5Cr", label: "Client Revenue Impact" },
+    //     { value: "10K+", label: "Leads/Month" },
+    //     { value: "300%", label: "Agency Growth" }
+    //   ],
+    //   testimonial: {
+    //     quote: "The marketing automation platform exceeded our expectations. Lead generation increased by 250% and conversion rates improved by 40%. The ROI was evident within the first quarter.",
+    //     author: "Priya Sharma",
+    //     position: "Marketing Director"
+    //   }
+    // }
   ];
 
   // Filter case studies based on active filters

@@ -74,7 +74,7 @@ const MissionSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white " id='our-mission'>
       <div className="container mx-auto px-6 lg:px-8">
         {/* Mission Statement */}
         <div className="text-center mb-20">

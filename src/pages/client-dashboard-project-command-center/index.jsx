@@ -90,7 +90,7 @@ const ClientDashboard = () => {
       name: "Dashboard User",
       email: "akashkumar.webdev@gmail.com",
       company: "AI Automation Hub",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      avatar: "./../public/assets/images/akash.jpg",
       plan: "Enterprise",
       joinDate: "December 2024",
       timezone: "Asia/Kolkata"
@@ -458,8 +458,10 @@ const ClientDashboard = () => {
                     <p className="text-sm text-white/80">Last login</p>
                     <p className="font-medium">Today, 9:30 AM IST</p>
                   </div>
-                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10"
+                    onClick={() => window.location.href = '/settings'}>
                     <Icon name="Settings" size={16} className="mr-2" />
+                    
                     Settings
                   </Button>
                 </div>

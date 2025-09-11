@@ -70,17 +70,17 @@ const Footer = () => {
     {
       icon: "Phone",
       title: "Phone",
-      details: ["+91 22 6789 1234", "+91 98765 43210"]
+      details: ["+91 8252472186", "+91 9508949406"]
     },
     {
       icon: "Mail",
       title: "Email",
-      details: ["hello@aiautomationhub.com", "support@aiautomationhub.com"]
+      details: ["akashkumar.webdev@gmail.com", "autheraai225@gmail.com"]
     },
     {
       icon: "Clock",
       title: "Business Hours",
-      details: ["Mon - Fri: 9:00 AM - 7:00 PM", "Sat: 10:00 AM - 4:00 PM", "24/7 Emergency Support"]
+      details: ["Mon - Fri: 9:00 AM - 9:00 PM", "Sat: 10:00 AM - 10:00 PM", "24/7 Emergency Support"]
     }
   ];
 

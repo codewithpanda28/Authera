@@ -18,27 +18,27 @@ const TrustIndicators = () => {
 
   const certifications = [
     {
-      name: "ISO 27001",
-      description: "Information Security Management",
-      icon: "Shield",
+      name: "AI Agent",
+      description: "Custom AI Assistants & Automation",
+      icon: "Brain",
       color: "text-success"
     },
     {
-      name: "SOC 2 Type II",
-      description: "Security & Availability",
-      icon: "Lock",
+      name: "n8n Workflows",
+      description: "Workflow Automation & Integrations",
+      icon: "Workflow",
       color: "text-secondary"
     },
     {
-      name: "GDPR Compliant",
-      description: "Data Protection Certified",
-      icon: "UserCheck",
+      name: "MERN Stack",
+      description: "Full-Stack Web Apps & APIs",
+      icon: "Code",
       color: "text-accent"
     },
     {
-      name: "AWS Partner",
-      description: "Advanced Consulting Partner",
-      icon: "Cloud",
+      name: "Open Source",
+      description: "Community Driven Innovation",
+      icon: "Globe",
       color: "text-warning"
     }
   ];
@@ -78,7 +78,7 @@ const TrustIndicators = () => {
 
   const keyMetrics = [
     {
-      value: "500+",
+      value: "2+",
       label: "Projects Completed",
       icon: "CheckCircle",
       color: "text-success"
@@ -90,7 +90,7 @@ const TrustIndicators = () => {
       color: "text-red-500"
     },
     {
-      value: "₹150Cr+",
+      value: "₹1.4 Lakh+",
       label: "Client Savings Generated",
       icon: "TrendingUp",
       color: "text-accent"
@@ -228,17 +228,17 @@ const TrustIndicators = () => {
           <div className="inline-flex items-center space-x-6 bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
             <div className="flex items-center space-x-2">
               <Icon name="MapPin" size={20} className="text-accent" />
-              <span className="text-text-primary font-medium">Mumbai, India</span>
+              <span className="text-text-primary font-medium">Jharkhand, India</span>
             </div>
             <div className="w-px h-6 bg-gray-200"></div>
             <div className="flex items-center space-x-2">
               <Icon name="Globe" size={20} className="text-secondary" />
-              <span className="text-text-primary font-medium">15+ Countries Served</span>
+              <span className="text-text-primary font-medium">3+ Countries Served</span>
             </div>
             <div className="w-px h-6 bg-gray-200"></div>
             <div className="flex items-center space-x-2">
               <Icon name="Users" size={20} className="text-success" />
-              <span className="text-text-primary font-medium">50+ Team Members</span>
+              <span className="text-text-primary font-medium">5+ Team Members</span>
             </div>
           </div>
         </div>

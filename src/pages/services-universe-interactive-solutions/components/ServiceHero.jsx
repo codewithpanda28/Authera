@@ -11,21 +11,21 @@ const ServiceHero = () => {
     {
       id: 'automation',
       title: 'Process Automation',
-      description: 'Watch AI streamline your workflows',
+      description: 'Automate repetitive tasks with n8n & AI agents to save hours of manual work.',
       icon: 'Zap',
       color: 'from-blue-500 to-cyan-400'
     },
     {
       id: 'chatbot',
       title: 'AI Chatbots',
-      description: 'Experience intelligent conversations',
+      description: 'Deploy smart AI assistants that handle customer queries, emails, and workflows.',
       icon: 'MessageSquare',
       color: 'from-purple-500 to-pink-400'
     },
     {
       id: 'analytics',
       title: 'Smart Analytics',
-      description: 'See data transform into insights',
+      description: 'See data transform into insightsTurn raw business data into actionable insights using AI-powered analysis.',
       icon: 'BarChart3',
       color: 'from-green-500 to-emerald-400'
     }

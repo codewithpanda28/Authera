@@ -27,7 +27,7 @@ const CTASection = () => {
   ];
 
   const stats = [
-    { number: "150+", label: "Successful Projects" },
+    { number: "2+", label: "Successful Projects" },
     { number: "98%", label: "Client Satisfaction" },
     { number: "45%", label: "Average ROI Increase" },
     { number: "24/7", label: "Support Available" }
@@ -55,7 +55,7 @@ const CTASection = () => {
           </h2>
           
           <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Join 150+ companies that have already transformed their operations with our proven AI automation solutions. Get your free consultation and ROI assessment.
+            Join 10+ companies that have already transformed their operations with our proven AI automation solutions. Get your free consultation and ROI assessment.
           </p>
         </div>
 
@@ -88,7 +88,7 @@ const CTASection = () => {
           ))}
         </div>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons
         <div className="text-center space-y-6">
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
             <Button 
@@ -127,7 +127,7 @@ const CTASection = () => {
               <span>Free ROI assessment</span>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Contact Info */}
         <div className="mt-16 pt-12 border-t border-white/20">
@@ -137,8 +137,8 @@ const CTASection = () => {
                 <Icon name="Phone" size={20} color="white" />
               </div>
               <h4 className="text-white font-semibold">Call Us</h4>
-              <p className="text-white/70 text-sm">+91 98765 43210</p>
-              <p className="text-white/70 text-sm">+1 (555) 123-4567</p>
+              <p className="text-white/70 text-sm">+91 8252472186</p>
+              <p className="text-white/70 text-sm">+91 9508949406</p>
             </div>
             
             <div className="space-y-2">
@@ -146,8 +146,8 @@ const CTASection = () => {
                 <Icon name="Mail" size={20} color="white" />
               </div>
               <h4 className="text-white font-semibold">Email Us</h4>
-              <p className="text-white/70 text-sm">hello@aiautomationhub.com</p>
-              <p className="text-white/70 text-sm">projects@aiautomationhub.com</p>
+              <p className="text-white/70 text-sm">akashkumar.webdev@gmail.com</p>
+              <p className="text-white/70 text-sm">autheraai225@gmail.com</p>
             </div>
             
             <div className="space-y-2">
