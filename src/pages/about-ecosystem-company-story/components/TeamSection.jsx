@@ -322,6 +322,7 @@ const TeamSection = () => {
                   </div>
                 </div>
               </div>
+            
             </div>
           </div>
         </div>
