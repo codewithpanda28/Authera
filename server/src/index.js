@@ -212,5 +212,5 @@ app.patch('/api/submissions/:id', async (req, res) => {
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
-  console.log(`API running on http://localhost:${port}`);
+  console.log(`API running on https://authera-backend-1.onrender.com`);
 });

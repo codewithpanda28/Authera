@@ -19,7 +19,7 @@ export default defineConfig({
     allowedHosts: ['.amazonaws.com', '.builtwithrocket.new'],
     proxy: {
       '/api': {
-        target: 'http://localhost:4000',
+        target: 'https://authera-backend-1.onrender.com',
         changeOrigin: true
       }
     }
