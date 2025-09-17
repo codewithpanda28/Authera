@@ -5,6 +5,7 @@ import Button from '../../../components/ui/Button';
 
 const Footer = () => {
   const currentYear = new Date()?.getFullYear();
+  
 
   const footerSections = [
     {
