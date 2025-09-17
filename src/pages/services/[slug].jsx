@@ -160,7 +160,7 @@ const ServiceDetailPage = () => {
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-gray-900">Technical Overview</h3>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                  <li>Architecture: ingestion -> parsing -> scoring -> workflow -> integrations</li>
+                  <li>Architecture: ingestion - parsing - scoring - workflow - integrations</li>
                   <li>Integrations: Google Calendar, SMTP/WhatsApp API, ATS/CRM via REST</li>
                   <li>Security: role-based access, audit logs, encrypted storage</li>
                 </ul>
