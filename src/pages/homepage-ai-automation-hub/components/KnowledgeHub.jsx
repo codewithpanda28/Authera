@@ -294,7 +294,17 @@ const KnowledgeHub = () => {
                         iconName="Download"
                         onClick={async () => {
                           try {
-                            await fetch('/api/purchases', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userName: 'Website Visitor', userEmail: 'unknown@user.com', projectId: resource.title.replace(/\s+/g,'-').toLowerCase(), projectTitle: resource.title, message: `Interested in ${resource.title}` }) });
+                            await fetch('/api/purchases', { 
+                              method: 'POST', 
+                              headers: { 'Content-Type': 'application/json' }, 
+                              body: JSON.stringify({ 
+                                user_name: 'Website Visitor', 
+                                user_email: 'unknown@user.com', 
+                                project_id: resource.title.replace(/\s+/g,'-').toLowerCase(), 
+                                project_title: resource.title, 
+                                message: `Interested in ${resource.title}` 
+                              }) 
+                            });
                           } catch {}
                           window.open(`https://wa.me/918252472186?text=${encodeURIComponent('I want to buy: ' + resource.title)}`, '_blank');
                         }}

@@ -1,44 +1,26 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
-import Image from '../../../components/AppImage';
-import ServiceDetailsModal from './ServiceDetailsModal';
 
 const ServiceSelector = () => {
+  const navigate = useNavigate();
   const [hoveredService, setHoveredService] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
 
   const services = [
     {
-      id: 'ai-hr-automation',
+      id: 'AI HR Automation (Resume Parser + Screening)',
       title: 'AI HR Automation (Resume Parser + Screening)',
       description: 'Revolutionize hiring with AI-powered tools that cut down manual HR work and bring top talent faster.',
       icon: 'Zap',
       priceRange: '₹75K – ₹2L',
       timeline: '3-4 weeks',
       savings: '60-80%',
-      features: [
-        'Bulk Resume Upload (single & bulk support with credits/coin system)',
-        'AI Candidate Scoring & Shortlisting',
-        'Automated Interview Scheduling (Google Calendar Integration)',
-        'Automated Candidate Communication – Email & WhatsApp notifications for updates.'
-      ],
+      features: ['Bulk Resume Upload (single & bulk support with credits/coin system)', 'AI Candidate Scoring & Shortlisting', 'Automated Interview Scheduling (Google Calendar Integration)', 'Automated Candidate Communication – Email & WhatsApp notifications for updates.'],
       gradient: 'from-accent to-accent/80',
       bgColor: 'bg-accent/10',
-      borderColor: 'border-accent/20',
-      image: 'https://images.unsplash.com/photo-1600880292089-90e1a3d9b1b3?w=1200&h=800&fit=crop',
-      howItWorks: [
-        { step: '1', title: 'Ingest Resumes', detail: 'Upload PDFs or DOCX resumes individually or in bulk.' },
-        { step: '2', title: 'AI Parsing', detail: 'Extract skills, experience, and entities using NLP.' },
-        { step: '3', title: 'Scoring', detail: 'Rank candidates by role-fit with configurable weights.' },
-        { step: '4', title: 'Schedule', detail: 'Auto-invite top candidates via Gmail/Outlook + Calendar.' }
-      ],
-      documents: [
-        { type: 'docx', label: 'Product One-Pager', url: '/assets/docs/hr-automation-onepager.docx' },
-        { type: 'ppt', label: 'Client Presentation', url: '/assets/docs/hr-automation-deck.pptx' }
-      ],
-      contact: { name: 'Akash Gupta', email: 'hello@authera.in', phone: '+91-90000-00000' }
+      borderColor: 'border-accent/20'
     },
     // {
     //   id: 'data-analytics',
@@ -107,7 +89,7 @@ const ServiceSelector = () => {
     // }
   ];
 
-  return (
+  return (<>
     <section className="py-20 bg-gradient-to-b from-white to-muted/30">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
@@ -242,22 +224,73 @@ const ServiceSelector = () => {
           </div>
         </div>
       </div>
-      {selectedService && (
-        <ServiceDetailsModal
-          service={selectedService}
-          onClose={() => setSelectedService(null)}
-          onBook={() => {
-            window.location.href = '/contact-scheduling-multi-channel-engagement';
-          }}
-          onCalculate={() => {
-            const anchor = document.getElementById('roi-calculator-anchor');
-            if (anchor) anchor.scrollIntoView({ behavior: 'smooth' });
-            setSelectedService(null);
-          }}
-        />
-      )}
     </section>
-  );
+    {/* Service Details Modal */}
+    {selectedService && (
+      <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSelectedService(null)}>
+        <div
+          className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
+          style={{ width: '70vw', maxWidth: '1100px', maxHeight: '85vh' }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={`p-6 border-b ${selectedService?.bgColor || 'bg-white'}`}>
+            <div className="flex items-start justify-between">
+              <div>
+                <div className="text-xs text-text-secondary mb-1">Starting from</div>
+                <div className="text-lg font-semibold text-primary">{selectedService?.priceRange}</div>
+                <h3 className="text-2xl font-bold text-primary mt-2">{selectedService?.title}</h3>
+                <p className="text-text-secondary mt-2 max-w-3xl">{selectedService?.description}</p>
+              </div>
+              <button className="text-text-secondary hover:text-primary" onClick={() => setSelectedService(null)} aria-label="Close">
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+          </div>
+          <div className="p-6 overflow-y-auto" style={{ maxHeight: 'calc(85vh - 84px)' }}>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-primary mb-3 text-sm">Timeline & Savings</h4>
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <div className="text-xs text-text-secondary">Timeline</div>
+                    <div className="font-semibold text-primary">{selectedService?.timeline}</div>
+                  </div>
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <div className="text-xs text-text-secondary">Cost Savings</div>
+                    <div className="font-semibold text-primary">{selectedService?.savings}</div>
+                  </div>
+                </div>
+
+                <h4 className="font-semibold text-primary mb-3 text-sm">Key Features</h4>
+                <ul className="space-y-2">
+                  {selectedService?.features?.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                      <svg className="w-4 h-4 text-success mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="space-y-4">
+                <div className="p-4 rounded-lg border border-gray-100">
+                  <div className="text-sm font-semibold text-primary mb-2">Get Started</div>
+                  <p className="text-sm text-text-secondary mb-3">Ready to explore {selectedService?.title}? Choose an action below.</p>
+                  <div className="flex flex-wrap gap-2">
+                    <button className="px-4 py-2 rounded-lg bg-accent text-white text-sm" onClick={() => { setSelectedService(null); navigate('/contact-scheduling-multi-channel-engagement'); }}>Book Consultation</button>
+                    <button className="px-4 py-2 rounded-lg border text-sm" onClick={() => { setSelectedService(null); navigate('/services-universe-interactive-solutions'); }}>Calculate ROI</button>
+                  </div>
+                </div>
+                <div className={`${selectedService?.bgColor || 'bg-muted/50'} p-4 rounded-lg`}>
+                  <div className="text-sm font-semibold text-primary mb-2">Why this solution?</div>
+                  <p className="text-sm text-text-secondary">High-impact automation focused on measurable business outcomes with fast implementation.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+  </>);
 };
 
 export default ServiceSelector;

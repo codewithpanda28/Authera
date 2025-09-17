@@ -15,11 +15,30 @@ const SubmissionsAdmin = () => {
         fetch('/api/contacts'),
         fetch('/api/purchases')
       ]);
-      const [sData, cData, pData] = await Promise.all([
+      const [sRaw, cRaw, pRaw] = await Promise.all([
         sRes.json(),
         cRes.json(),
         pRes.json()
       ]);
+      // Normalize timestamps and field names
+      const sData = (sRaw || []).map(x => ({
+        ...x,
+        createdAt: x.createdAt || x.created_at || x.created || new Date().toISOString()
+      }));
+      const cData = (cRaw || []).map(x => ({
+        ...x,
+        createdAt: x.createdAt || x.created_at || x.created || new Date().toISOString()
+      }));
+      const pData = (pRaw || []).map(x => ({
+        id: x.id,
+        userName: x.user_name || x.userName,
+        userEmail: x.user_email || x.userEmail,
+        projectId: x.project_id || x.projectId,
+        projectTitle: x.project_title || x.projectTitle,
+        message: x.message,
+        status: x.status,
+        createdAt: x.createdAt || x.created_at || x.created || new Date().toISOString()
+      }));
       const contactsAsSubs = (cData || []).map(c => ({
         id: c._id || c.id,
         type: 'contact',

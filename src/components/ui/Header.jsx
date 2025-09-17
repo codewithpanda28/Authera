@@ -7,7 +7,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const [visitCount, setVisitCount] = useState(null);
+  const [visitCount, setVisitCount] = useState(0);
   const navigate = useNavigate();
 
   const navigationItems = [
@@ -96,6 +96,10 @@ const Header = () => {
                 Intelligent Solutions
               </span>
             </div>
+            {/* Mobile visits indicator */}
+            <div className="ml-3 text-[10px] text-text-secondary lg:hidden">
+              Visits: <span className="font-semibold text-primary">{visitCount}</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -155,11 +159,9 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
-            {typeof visitCount === 'number' && (
-              <div className="text-xs text-text-secondary mr-2">
-                Visits: <span className="font-semibold text-primary">{visitCount}</span>
-              </div>
-            )}
+            <div className="text-xs text-text-secondary mr-2">
+              Visits: <span className="font-semibold text-primary">{visitCount}</span>
+            </div>
             <Button
               variant="outline"
               size="sm"

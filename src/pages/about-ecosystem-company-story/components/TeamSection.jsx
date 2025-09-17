@@ -12,7 +12,7 @@ const TeamSection = () => {
       name: "Akash Kumar",
       role: "CEO & Founder",
       department: "AI & Automation",
-      image: "./../public/assets/images/akash.jpg",
+      image: "/assets/images/akash.jpg",
       bio: `Akash Kumar is the CEO & Founder of AI Automation Hub. He is a self-taught AI & automation expert with extensive experience in LLMs, LangChain, n8n workflows, and full-stack MERN development. He has built multiple plug-and-play AI automation projects, including RAG chatbots, wedding biodata generators, and viral content generators.\n\nAs a visionary founder, he aims to empower businesses with intelligent AI tools that simplify complex processes, increase efficiency, and drive measurable results.`,
       specializations: ["AI Automation", "LLMs & LangChain", "n8n Workflow Development", "MERN Stack Development"],
       certifications: ["GroqCloud API Certified", "OpenAI API Experience"],

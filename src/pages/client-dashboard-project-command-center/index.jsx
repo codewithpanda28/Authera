@@ -90,7 +90,7 @@ const ClientDashboard = () => {
       name: "Dashboard User",
       email: "akashkumar.webdev@gmail.com",
       company: "AI Automation Hub",
-      avatar: "./../public/assets/images/akash.jpg",
+      avatar: "/assets/images/akash.jpg",
       plan: "Enterprise",
       joinDate: "December 2024",
       timezone: "Asia/Kolkata"

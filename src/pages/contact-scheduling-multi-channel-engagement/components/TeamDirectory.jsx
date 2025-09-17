@@ -38,7 +38,7 @@ const TeamDirectory = () => {
       email: 'akashkumar.webdev@gmail.com',
       phone: '+91 8252472186',
       linkedin: 'https://www.linkedin.com/in/codewithpanda28',
-      avatar: './../public/assets/images/akash.jpg',
+      avatar: '/assets/images/akash.jpg',
       bio: 'CEO & Founder of AI Automation Hub. Self-taught AI & automation expert specializing in LLMs, LangChain, n8n workflows, and MERN stack development. Builds plug-and-play AI tools that simplify business processes and drive results.',
       specialties: ['AI Automation', 'LLMs & LangChain', 'n8n Workflow Development', 'MERN Stack Development', 'AI Project Deployment'],
       languages: ['English', 'Hindi'],

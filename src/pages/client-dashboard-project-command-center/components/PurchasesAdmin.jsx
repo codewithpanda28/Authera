@@ -10,7 +10,17 @@ const PurchasesAdmin = () => {
     setLoading(true);
     try {
       const res = await fetch('/api/purchases');
-      const data = await res.json();
+      const raw = await res.json();
+      const data = (raw || []).map(x => ({
+        id: x.id,
+        userName: x.user_name || x.userName,
+        userEmail: x.user_email || x.userEmail,
+        projectId: x.project_id || x.projectId,
+        projectTitle: x.project_title || x.projectTitle,
+        message: x.message,
+        status: x.status,
+        createdAt: x.createdAt || x.created_at || x.created || new Date().toISOString()
+      }));
       setPurchases(data);
     } catch (e) {
       // noop
