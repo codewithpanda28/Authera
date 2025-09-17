@@ -11,6 +11,7 @@ import Homepage from './pages/homepage-ai-automation-hub';
 import ServicesUniversePage from './pages/services-universe-interactive-solutions';
 import ArticlesPage from './pages/articles';
 import ArticleDetail from './pages/articles/[id]';
+import ServiceDetailPage from './pages/services/[slug]';
 
 const Routes = () => {
   return (
@@ -26,6 +27,7 @@ const Routes = () => {
         <Route path="/contact-scheduling-multi-channel-engagement" element={<ContactSchedulingMultiChannelEngagement />} />
         <Route path="/homepage-ai-automation-hub" element={<Homepage />} />
         <Route path="/services-universe-interactive-solutions" element={<ServicesUniversePage />} />
+        <Route path="/services/:slug" element={<ServiceDetailPage />} />
         <Route path="/articles" element={<ArticlesPage />} />
         <Route path="/articles/:id" element={<ArticleDetail />} />
         <Route path="*" element={<NotFound />} />

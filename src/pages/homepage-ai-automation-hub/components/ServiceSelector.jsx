@@ -1,25 +1,44 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import Image from '../../../components/AppImage';
+import ServiceDetailsModal from './ServiceDetailsModal';
 
 const ServiceSelector = () => {
-  const navigate = useNavigate();
   const [hoveredService, setHoveredService] = useState(null);
+  const [selectedService, setSelectedService] = useState(null);
 
   const services = [
     {
-      id: 'AI HR Automation (Resume Parser + Screening)',
+      id: 'ai-hr-automation',
       title: 'AI HR Automation (Resume Parser + Screening)',
       description: 'Revolutionize hiring with AI-powered tools that cut down manual HR work and bring top talent faster.',
       icon: 'Zap',
       priceRange: '₹75K – ₹2L',
       timeline: '3-4 weeks',
       savings: '60-80%',
-      features: ['Bulk Resume Upload (single & bulk support with credits/coin system)', 'AI Candidate Scoring & Shortlisting', 'Automated Interview Scheduling (Google Calendar Integration)', 'Automated Candidate Communication – Email & WhatsApp notifications for updates.'],
+      features: [
+        'Bulk Resume Upload (single & bulk support with credits/coin system)',
+        'AI Candidate Scoring & Shortlisting',
+        'Automated Interview Scheduling (Google Calendar Integration)',
+        'Automated Candidate Communication – Email & WhatsApp notifications for updates.'
+      ],
       gradient: 'from-accent to-accent/80',
       bgColor: 'bg-accent/10',
-      borderColor: 'border-accent/20'
+      borderColor: 'border-accent/20',
+      image: 'https://images.unsplash.com/photo-1600880292089-90e1a3d9b1b3?w=1200&h=800&fit=crop',
+      howItWorks: [
+        { step: '1', title: 'Ingest Resumes', detail: 'Upload PDFs or DOCX resumes individually or in bulk.' },
+        { step: '2', title: 'AI Parsing', detail: 'Extract skills, experience, and entities using NLP.' },
+        { step: '3', title: 'Scoring', detail: 'Rank candidates by role-fit with configurable weights.' },
+        { step: '4', title: 'Schedule', detail: 'Auto-invite top candidates via Gmail/Outlook + Calendar.' }
+      ],
+      documents: [
+        { type: 'docx', label: 'Product One-Pager', url: '/assets/docs/hr-automation-onepager.docx' },
+        { type: 'ppt', label: 'Client Presentation', url: '/assets/docs/hr-automation-deck.pptx' }
+      ],
+      contact: { name: 'Akash Gupta', email: 'hello@authera.in', phone: '+91-90000-00000' }
     },
     // {
     //   id: 'data-analytics',
@@ -175,7 +194,7 @@ const ServiceSelector = () => {
                   className={`w-full group-hover:bg-gradient-to-r group-hover:${service?.gradient} group-hover:text-white group-hover:border-transparent transition-all duration-300`}
                   iconName="ArrowRight"
                   iconPosition="right"
-                  onClick={() => navigate(`/services-universe-interactive-solutions?category=${service?.id}`)}
+                  onClick={() => setSelectedService(service)}
                 >
                   Learn More
                 </Button>
@@ -223,6 +242,20 @@ const ServiceSelector = () => {
           </div>
         </div>
       </div>
+      {selectedService && (
+        <ServiceDetailsModal
+          service={selectedService}
+          onClose={() => setSelectedService(null)}
+          onBook={() => {
+            window.location.href = '/contact-scheduling-multi-channel-engagement';
+          }}
+          onCalculate={() => {
+            const anchor = document.getElementById('roi-calculator-anchor');
+            if (anchor) anchor.scrollIntoView({ behavior: 'smooth' });
+            setSelectedService(null);
+          }}
+        />
+      )}
     </section>
   );
 };
